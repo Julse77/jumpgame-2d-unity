@@ -1,2 +1,12 @@
 # jumping-game-unity
-this project is toy-project.. just my hobby..
+
+## Notice
+1. 본 프로젝트는 심심풀이 토이 프로젝트입니다.
+2. 해당 프로젝트를 마음대로 쓰셔도 되지만, 책임은 지지 않습니다.
+
+## Update
+### 2023.11.28
+1. 플레이어 이동 및 점프 기능 구현
+2. 지형 추가를 위한 텍스쳐 파일 추가
+
+   
