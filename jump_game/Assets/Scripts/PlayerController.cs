@@ -6,28 +6,49 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform PlayerTransform;
-    public Rigidbody2D PlayerRigidbody;
-    private float moveSpeed = 0.1f;
-    // private float jumpHeight = 0.4f;
+    private Transform PlayerTransform;
+    private Rigidbody2D PlayerRigidbody;
+    private float MoveSpeed = 0.1f;
+    private float JumpHeight = 5.0f;
+    private Vector2 MovePosition;
+    private Vector2 CurPosition;
 
-    void Update()
+    private void Start()
     {
-        if(Input.GetKey(KeyCode.RightArrow))
+        PlayerTransform = GetComponent<Transform>();
+        PlayerRigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerMove();
+        PlayerJump();
+    }
+
+    private void PlayerMove()
+    {
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             PlayerTransform.rotation = new Quaternion(0, 180, 0, 0);
-            Vector2 movePosition = new Vector2(moveSpeed, 0f);
-            Vector2 curPostion = PlayerRigidbody.position + movePosition;
-            PlayerRigidbody.MovePosition(curPostion);
+            MovePosition = new Vector2(MoveSpeed, 0f);
+            CurPosition = PlayerRigidbody.position + MovePosition;
+            PlayerRigidbody.MovePosition(CurPosition);
         }
-        if(Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             PlayerTransform.rotation = new Quaternion(0, 0, 0, 0);
-            Vector2 movePosition = new Vector2(-moveSpeed, 0f);
-            Vector2 curPostion = PlayerRigidbody.position + movePosition;
-            PlayerRigidbody.MovePosition(curPostion);
+            MovePosition = new Vector2(-MoveSpeed, 0f);
+            CurPosition = PlayerRigidbody.position + MovePosition;
+            PlayerRigidbody.MovePosition(CurPosition);
         }
     }
 
+    private void PlayerJump()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, JumpHeight);
+        }
+    }
 
 }
